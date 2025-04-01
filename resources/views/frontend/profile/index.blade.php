@@ -21,7 +21,7 @@
 <div class="page-content-wrapper">
   <div class="container">
       <!-- Profile Wrapper-->
-      <div class="profile-wrapper-area py-3">
+      <div class="profile-wrapper-area">
         <!-- User Information-->
         <div class="card user-info-card">
           <div class="card-body p-4 d-flex align-items-center">

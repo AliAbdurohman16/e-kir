@@ -1,26 +1,33 @@
 @extends('layouts.frontend.main')
 
-@section('title', 'Beranda')
+@section('title', 'Riwayat')
 
 <!-- Header Area -->
-@include('layouts.frontend.header')
+<div class="header-area" id="headerArea">
+    <div class="container h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
+      <!-- Back Button-->
+      <div class="back-button me-2 me-2"><a href="{{ route('home') }}"><i class="ti ti-arrow-left"></i></a></div>
+      <!-- Page Title-->
+      <div class="page-heading">
+        <h6 class="mb-0">Riwayat</h6>
+      </div>
+      <div class="user-profile-icon ms-2">
+        <a href="{{ route('profile.index') }}">
+          @if (Auth::user()->image == 'default/user.jpg')
+            <img src="{{ asset('default/user.jpg') }}" alt="image">
+          @else
+            <img src="{{ asset('storage/users/' . Auth::user()->image ) }}" alt="image">
+          @endif
+        </a>
+      </div>
+    </div>
+  </div>
 
 @section('content')
 <div class="page-content-wrapper">
   <div class="container">
-    <h4>Selamat Datang, {{ Auth::user()->name }}!</h4>
-    
-    @if ($uji->isEmpty())
-    <div class="d-flex justify-content-center align-items-center vh-100">
-      <p class="text-center">Silahkan melakukan daftar uji kendaraan terlebih dahulu</p>
-    </div>
-    @else
-    <!-- Riwayat Uji-->
     <div class="weekly-best-seller-area py-3">
       <div class="container">
-        <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
-          <h6>Riwayat Pengujian</h6><a class="btn btn-sm btn-light" href="{{ route('history') }}">Lihat semua<i class="ms-1 ti ti-arrow-right"></i></a>
-        </div>
         <div class="row g-2">
           @foreach ($uji as $u)
           <div class="col-12">
@@ -51,7 +58,6 @@
         </div>
       </div>
     </div>
-    @endif
   </div>
   
 </div>

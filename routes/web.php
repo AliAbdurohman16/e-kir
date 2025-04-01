@@ -17,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::group(['middleware' => ['user-access:user']], function () {
         Route::get('home', [Frontend\HomeController::class, 'index'])->name('home');
+        Route::get('history', [Frontend\HistoryController::class, 'index'])->name('history');
+        Route::get('history/{id}', [Frontend\HistoryController::class, 'show'])->name('history.show');
         Route::resource('profile', Frontend\ProfileController::class);
         Route::resource('daftar-uji', Frontend\DaftarUjiController::class);
     });

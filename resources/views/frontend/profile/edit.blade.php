@@ -27,7 +27,7 @@
 <div class="page-content-wrapper">
   <div class="container">
       <!-- Profile Wrapper-->
-      <div class="profile-wrapper-area py-3">
+      <div class="profile-wrapper-area">
         <!-- User Information-->
         <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
           @csrf

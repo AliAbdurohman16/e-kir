@@ -916,8 +916,8 @@ input:-webkit-autofill:active {
 
 /* Miscellaneous CSS */
 .page-content-wrapper {
-  margin-top: 3.125rem;
-  margin-bottom: 3.125rem;
+  margin-top: 4.125rem;
+  margin-bottom: 5.125rem;
 }
 
 .pwa-install-alert {
@@ -1328,6 +1328,7 @@ input:-webkit-autofill:active {
   -webkit-transition-duration: 500ms;
           transition-duration: 500ms;
   height: 3.125rem;
+  padding: 30px 0;
 }
 @media only screen and (min-width:1200px) {
   .suha-footer-nav {

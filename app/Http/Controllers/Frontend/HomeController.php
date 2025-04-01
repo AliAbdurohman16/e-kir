@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data['uji'] = Uji::count();
+        $data['uji'] = Uji::latest()->take(10)->get();
         
         return view('frontend.home', $data);
     }

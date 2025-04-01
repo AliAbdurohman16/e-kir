@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('kode')->nullable();
+            $table->string('kode')->nullable();
             $table->date('tanggal_pengujian')->nullable();
             $table->string('jenis_kendaraan')->nullable();
             $table->string('nama')->nullable();
@@ -41,7 +41,8 @@ return new class extends Migration
             $table->string('surat_uji_kendaraan')->nullable();
             $table->string('surat_uji_kendaraan_size_asli')->nullable();
             $table->string('surat_uji_kendaraan_size_kompresi')->nullable();
-            $table->string('status')->default('Belum Validasi');
+            $table->string('status_validasi')->default('Belum Validasi');
+            $table->string('status_uji')->default('Belum Diuji');
             $table->timestamps();
         });
     }

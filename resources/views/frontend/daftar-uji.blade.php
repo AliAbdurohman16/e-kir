@@ -24,12 +24,24 @@
   </div>
 
 @section('content')
+@if (Session::has('success'))
+<div class="toast pwa-install-alert shadow bg-white" id="installWrap" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" data-bs-autohide="true">
+  <div class="toast-body">
+    <div class="content d-flex align-items-center mb-2">
+      <h6 class="mb-0">Berhasil!</h6>
+      <button class="btn-close ms-auto" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <span class="mb-2 d-block">{{ Session::get('success') }}</span>
+  </div>
+</div>
+@endif
+
 <div class="page-content-wrapper">
   <div class="container">
       <!-- Profile Wrapper-->
-      <div class="profile-wrapper-area py-3">
+      <div class="profile-wrapper-area">
         <!-- User Meta Data-->
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('daftar-uji.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
           <div class="card user-data-card">
             <div class="card-body">
@@ -72,7 +84,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Alamat Garasi</span></div>
-                <textarea class="form-control @error('alamat_garasi') is-invalid @enderror" name="alamat_garasi" rows="2" required>{{ old('alamat_garasi') }}</textarea>
+                <textarea class="form-control @error('alamat_garasi') is-invalid @enderror" name="alamat_garasi" rows="2" placeholder="Alamat Garasi" required>{{ old('alamat_garasi') }}</textarea>
                 @error('alamat_garasi')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -108,7 +120,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Kendaraan</span></div>
-                <input class="form-control @error('nomor_kendaraan') is-invalid @enderror" type="number" name="nomor_kendaraan" placeholder="Nomor Kendaraan" required>
+                <input class="form-control @error('nomor_kendaraan') is-invalid @enderror" type="text" name="nomor_kendaraan" placeholder="Nomor Kendaraan" required>
                 @error('nomor_kendaraan')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -117,7 +129,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Pemeriksaan</span></div>
-                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="number" name="nomor_pemeriksaan" placeholder="Nomor Pemeriksaan" required>
+                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" placeholder="Nomor Pemeriksaan" required>
                 @error('nomor_pemeriksaan')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -126,7 +138,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Chassis</span></div>
-                <input class="form-control @error('nomor_chassis') is-invalid @enderror" type="number" name="nomor_chassis" placeholder="Nomor Chassis" required>
+                <input class="form-control @error('nomor_chassis') is-invalid @enderror" type="text" name="nomor_chassis" placeholder="Nomor Chassis" required>
                 @error('nomor_chassis')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -135,7 +147,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Mesin</span></div>
-                <input class="form-control @error('nomor_mesin') is-invalid @enderror" type="number" name="nomor_mesin" placeholder="Nomor Mesin" required>
+                <input class="form-control @error('nomor_mesin') is-invalid @enderror" type="text" name="nomor_mesin" placeholder="Nomor Mesin" required>
                 @error('nomor_mesin')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -172,7 +184,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Tanggal Terakhir Pengujian</span></div>
-                <input class="form-control @error('tempat_terakhir_pengujian') is-invalid @enderror" type="date" name="tanggal_terakhir_pengujian" placeholder="Tanggal Terakhir Pengujian" required>
+                <input class="form-control @error('tanggal_terakhir_pengujian') is-invalid @enderror" type="date" name="tanggal_terakhir_pengujian" placeholder="Tanggal Terakhir Pengujian" required>
                 @error('tanggal_terakhir_pengujian')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -215,7 +227,7 @@
                     </span>
                 @enderror
               </div>
-              <button class="btn btn-primary btn-lg w-100" type="submit">Simpan</button>
+              <button class="btn btn-primary btn-lg w-100" type="submit">Kirim</button>
             </div>
           </div>
         </form>
