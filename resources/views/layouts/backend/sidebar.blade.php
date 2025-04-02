@@ -1,48 +1,82 @@
-<div class="dashboard-navigation">
-    <!-- Responsive Navigation Trigger -->
-    <div id="dashboard-Navigation" class="slick-nav"></div>
-    <div id="navigation" class="navigation-container">
-        <ul>
-            <li class="{{ request()->is('dashboard') ? 'active-menu' : '' }}"><a href="{{ route('dashboard') }}"><i class="far fa-chart-bar"></i> Dashboard</a></li>
-            @if (Auth::user()->hasRole('user'))
-            <li><a href="{{ route('package') }}"><i class="fas fa-kaaba"></i>Paket</a></li>
-            @endif
-            @if (Auth::user()->hasRole('owner'))
-            <li><a href="{{ route('log-activities') }}"><i class="fas fa-clock"></i>Log Aktivitas</a></li>
-            @endif
-            @if (Auth::user()->hasRole('owner') || Auth::user()->hasRole('admin'))
-            <li class="{{ request()->is('packages*') ? 'active-menu' : '' }}"><a href="{{ route('packages.index') }}"><i class="fas fa-kaaba"></i>Paket</a></li>
-            <li class="{{ request()->is('congregations') ? 'active-menu' : '' }}"><a href="{{ route('congregations') }}"><i class="fas fa-users"></i> Data Jemaah</a></li> 
-            <li class="{{ request()->is('transactions') ? 'active-menu' : '' }}"><a href="{{ route('transactions') }}"><i class="fas fa-money-bill-alt"></i>Transaksi</a></li>
-            <li class="{{ request()->is('report') ? 'active-menu' : '' }}"><a href="{{ route('report.index') }}"><i class="fas fa-file-alt"></i>Laporan</a></li>
-            @endif
-            @if (Auth::user()->hasRole('admin'))
-            <li class="{{ request()->is('users*') ? 'active-menu' : '' }}"><a href="{{ route('users.index') }}"><i class="fas fa-user"></i>Data Pengguna</a></li>
-            @endif
-            @if (Auth::user()->hasRole('owner'))
-            <li class="{{ request()->is('employees*') ? 'active-menu' : '' }}"><a href="{{ route('employees.index') }}"><i class="fas fa-user-tie"></i>Data Pegawai</a></li>
-            @endif
-            <li class="{{ request()->is('biodata*') ? 'active-menu' : '' }} || {{ request()->is('profile*') ? 'active-menu' : '' }} || {{ request()->is('ratings.classes*') ? 'active-menu' : '' }}">
-                <a><i class="fas fa-user-cog"></i>{{ Auth::user()->hasRole('user') ? 'Biodata Dan Akun' : 'Akun' }}</a>
-                <ul>
-                    @if (Auth::user()->hasRole('user'))
+<aside class="sidebar">
+    <button type="button" class="sidebar-close-btn">
+        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+    </button>
+    <div>
+        <a href="" class="sidebar-logo justify-content-center">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/logo-small.png" alt="site logo" class="light-logo">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/logo-small.png" alt="site logo" class="logo-icon">
+        </a>
+    </div>
+    <div class="sidebar-menu-area">
+        <ul class="sidebar-menu" id="sidebar-menu">
+            <li class="{{ request()->is('dashboard') ? 'active-page' : '' }}">
+                <a href="{{ route('dashboard') }}">
+                    <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="dropdown {{ request()->is('data-uji*') ? 'open' : '' }}">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="solar:document-add-outline" class="menu-icon"></iconify-icon>
+                    <span>Data Uji</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    @if (Auth::user()->hasRole('admin'))
                     <li>
-                        <a href="{{ route('biodata.index') }}">Biodata</a>
+                        <a href="{{ route('data-uji.belum-validasi') }}"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Belum Validasi</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('data-uji.sudah-validasi') }}"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Sudah Validasi</a>
+                    </li>
+                    @else
+                    <li>
+                        <a href="{{ route('data-uji.belum-diuji') }}"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Belum Diuji</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('data-uji.teruji') }}"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Teruji</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('data-uji.tidak-teruji') }}"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Tidak Teruji</a>
                     </li>
                     @endif
-                    <li>
-                        <a href="{{ route('profile.index') }}">Profil</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('password-change.index') }}">Kata Sandi</a>
-                    </li>
                 </ul>
             </li>
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @if (Auth::user()->hasRole('admin'))
+            <li class="{{ request()->is('pengguna*') ? 'active-page' : '' }}">
+                <a href="{{ route('pengguna.index') }}">
+                    <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                    <span>Data Pengguna</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('laporan*') ? 'active-page' : '' }}">
+                <a href="{{ route('laporan') }}">
+                    <iconify-icon icon="solar:document-text-outline" class="menu-icon"></iconify-icon>
+                    <span>Laporan</span>
+                </a>
+            </li>
+            @endif
+            <li class="{{ request()->is('profil*') ? 'active-page' : '' }}">
+                <a href="{{ route('profil') }}">
+                    <iconify-icon icon="solar:user-linear" class="menu-icon"></iconify-icon>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('ubah-kata-sandi*') ? 'active-page' : '' }}">
+                <a href="{{ route('ubah-kata-sandi') }}">
+                    <iconify-icon icon="tabler:key" class="menu-icon"></iconify-icon>
+                    <span>Ubah Kata Sandi</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <iconify-icon icon="lucide:power" class="menu-icon"></iconify-icon>
+                    <span>Keluar</span>
+                </a>
+            </li>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         </ul>
     </div>
-</div>
+</aside>

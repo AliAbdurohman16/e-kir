@@ -1,27 +1,60 @@
-<div class="dashboard-header sticky-header">
-    <div class="content-left  logo-section pull-left">
-        <h1><a href=""><img src="{{ asset('backend') }}/assets/images/logo.png" width="180px" alt="logo"></a></h1>
-    </div>
-    <div class="heaer-content-right pull-right">
-        <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-                <div class="dropdown-item profile-sec">
-                    <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="avatar">
-                    <span>{{ Auth::user()->name }} </span>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-            </a>
-            <div class="dropdown-menu account-menu">
-                <ul>
-                    {{-- <li><a href="#"><i class="fas fa-cog"></i>Pengaturan</a></li> --}}
-                    <li><a href="{{ route('profile.index') }}"><i class="fas fa-user-tie"></i>Profil</a></li>
-                    <li><a href="{{ route('password-change.index') }}"><i class="fas fa-key"></i>Kata Sandi</a></li>
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Keluar</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </ul>
+
+<div class="navbar-header">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+            <div class="d-flex flex-wrap align-items-center gap-4">
+                <button type="button" class="sidebar-toggle {{ request()->is('cashier*') ? 'active' : '' }}">
+                    <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
+                    <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
+                </button>
+                <button type="button" class="sidebar-mobile-toggle">
+                    <iconify-icon icon="heroicons:bars-3-solid" class="icon"></iconify-icon>
+                </button>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <div class="dropdown">
+                    <button class="d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown">
+                        @if (Auth::user()->image == 'default/user.jpg')
+                            <img src="{{ asset('default/user.jpg') }}" alt="image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+                        @else
+                            <img src="{{ asset('storage/users/' . Auth::user()->image) }}" alt="image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+                        @endif
+                    </button>
+                    <div class="dropdown-menu to-top dropdown-menu-sm">
+                        <div class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
+                            <div>
+                                <h6 class="text-lg text-primary-light fw-semibold mb-2">{{ Auth::user()->name }}</h6>
+                                <span class="text-secondary-light fw-medium text-sm">{{ Auth::user()->hasRole('admin') ? 'Admin' : 'Penguji' }}</span>
+                            </div>
+                            <button type="button" class="hover-text-danger">
+                                <iconify-icon icon="radix-icons:cross-1" class="icon text-xl"></iconify-icon>
+                            </button>
+                        </div>
+                        <ul class="to-top-list">
+                            <li>
+                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profil') }}">
+                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('ubah-kata-sandi') }}">
+                                    <iconify-icon icon="tabler:key" class="icon text-xl"></iconify-icon> Kata Sandi
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Keluar
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </ul>
+                    </div>
+                </div><!-- Profile dropdown end -->
             </div>
         </div>
     </div>

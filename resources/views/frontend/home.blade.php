@@ -36,10 +36,12 @@
                       </span>
                   </div>
                   <div>
-                      <small>Status Pengujian:</small>
-                      <span class="badge {{ $u->status_uji == 'Teruji' ? 'bg-success' : ($u->status_uji == 'Belum Diuji' ? 'bg-secondary' : 'bg-warning')  }}">
-                          {{ ucfirst($u->status_uji) }}
-                      </span>
+                    @if ($u->status_validasi == 'Valid') 
+                    <small>Status Pengujian:</small>
+                    <span class="badge {{ $u->status_uji == 'Teruji' ? 'bg-success' : ($u->status_uji == 'Belum Diuji' ? 'bg-secondary' : 'bg-danger')  }}">
+                        {{ ucfirst($u->status_uji) }}
+                    </span>
+                    @endif
                   </div>
               </div>
               </div>
