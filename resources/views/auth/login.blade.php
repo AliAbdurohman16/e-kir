@@ -9,7 +9,8 @@
     <div class="background-shape"></div>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-10 col-lg-8"><img class="big-logo" src="{{ asset('frontend') }}/assets/img/core-img/logo-white.png" alt="">
+        <div class="col-10 col-lg-8">
+          <h3 class="text-white">E-KIR</h3>
           <!-- Register Form-->
           <div class="register-form mt-5">
             @if ($errors->has('email') || $errors->has('password'))
