@@ -30,7 +30,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-label">Dari Tanggal</label>
-                            <input id="start_date" type="text" class="form-control @error('start_date') is-invalid @enderror" name="start_date" placeholder="yyyy-mm-dd --:--">
+                            <input id="start_date" type="text" class="form-control @error('start_date') is-invalid @enderror" name="start_date" placeholder="yyyy-mm-dd --:--" required>
                             @error('start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-label">Sampai Tanggal</label>
-                            <input id="end_date" type="text" class="form-control @error('end_date') is-invalid @enderror" name="end_date" placeholder="yyyy-mm-dd --:--">
+                            <input id="end_date" type="text" class="form-control @error('end_date') is-invalid @enderror" name="end_date" placeholder="yyyy-mm-dd --:--" required>
                             @error('end_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="col-12 mb-3 mt-3">
-                        <button class="btn btn-primary-600 w-100" type="submit">Simpan</button>
+                        <button class="btn btn-primary-600 w-100" type="submit">Proses</button>
                     </div>
                 </form>
             </div>

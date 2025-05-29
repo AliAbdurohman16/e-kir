@@ -21,7 +21,7 @@
 
     <body onload="window.print()">
 
-        <h3 class="text-center mt-5">Laporan Transaksi Orderan</h3>
+        <h3 class="text-center mt-5">Laporan E-KIR</h3>
         <h5 class="text-center">Berdasarkan Tanggal {{ date('d-m-Y', strtotime($start_date)) }} - {{ date('d-m-Y', strtotime($end_date)) }}</h5>
 
         <div class="m-4">
