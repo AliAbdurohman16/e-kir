@@ -108,13 +108,13 @@
                 </div>
                 <div class="col-12">
                     <div class="d-flex justify-content-between">
-                        <span class="fw-semibold">Tempat Terakhir Pengujian</span>
+                        <span class="fw-semibold">Tanggal Terakhir Pengujian</span>
                         <span class="text-muted">{{ date('d/m/Y', strtotime($uji->tanggal_terakhir_pengujian)) }}</span>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex justify-content-between">
-                        <span class="fw-semibold">Tanggal Terakhir Pengujian</span>
+                        <span class="fw-semibold">Tempat Terakhir Pengujian</span>
                         <span class="text-muted">{{ $uji->tempat_terakhir_pengujian }}</span>
                     </div>
                 </div>
