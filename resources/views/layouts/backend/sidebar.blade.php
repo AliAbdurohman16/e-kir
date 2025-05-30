@@ -4,8 +4,8 @@
     </button>
     <div>
         <a href="" class="sidebar-logo justify-content-center">
-            <img src="{{ asset('frontend') }}/assets/img/core-img/logo-small.png" alt="site logo" class="light-logo">
-            <img src="{{ asset('frontend') }}/assets/img/core-img/logo-small.png" alt="site logo" class="logo-icon">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png" alt="site logo" class="light-logo">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png" alt="site logo" class="logo-icon">
         </a>
     </div>
     <div class="sidebar-menu-area">

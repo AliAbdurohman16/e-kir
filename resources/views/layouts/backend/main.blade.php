@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | E-KIR</title>
-    <link rel="apple-touch-icon" href="{{ asset('frontend') }}/assets/img/icons/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('frontend') }}/assets/img/icons/icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('frontend') }}/assets/img/icons/icon-167x167.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend') }}/assets/img/icons/icon-180x180.png">
+    <link rel="apple-touch-icon" href="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png">
     <!-- remix icon font css  -->
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/remixicon.css">
     <!-- BootStrap css -->

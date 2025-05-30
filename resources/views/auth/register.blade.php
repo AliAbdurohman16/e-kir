@@ -10,6 +10,11 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-10 col-lg-8">
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/DISHUB.png" alt="DISHUB Logo" style="height: 80px; margin-right: 10px;">
+            <img src="{{ asset('frontend') }}/assets/img/core-img/FKOM.png" alt="FKOM Logo" style="height: 80px;">
+          </div>
+          
           <h3 class="text-white">E-KIR</h3>
           <!-- Register Form-->
           <div class="register-form mt-5">
