@@ -99,7 +99,9 @@
               <div class="data-content">
                 <img src="{{ asset('storage/ktp/' . $uji->ktp ) }}" width="100" alt="ktp"><br>
                 <small class="file-size-kk">Ukuran Asli : {{ $uji->ktp_size_asli ?? '0 KB' }}</small> <br>
-                <small>Ukuran Kompresi : {{ $uji->ktp_size_kompresi ?? '0 KB' }}</small>
+                <small>Ukuran Kompresi : {{ $uji->ktp_size_kompresi ?? '0 KB' }}</small> <br>
+                <small>Compression Ratio : {{ $uji->ktp_compression_ratio ?? '0%' }}</small> <br>
+                <small>Space Saving : {{ $uji->ktp_space_saving ?? '0%' }}</small> <br>
               </div>
             </div>
             <div class="single-profile-data d-flex align-items-center justify-content-between">
@@ -107,7 +109,9 @@
               <div class="data-content">
                 <img src="{{ asset('storage/stnk/' . $uji->stnk ) }}" width="100" alt="stnk"><br>
                 <small class="file-size-kk">Ukuran Asli : {{ $uji->stnk_size_asli ?? '0 KB' }}</small> <br>
-                <small>Ukuran Kompresi : {{ $uji->stnk_size_kompresi ?? '0 KB' }}</small>
+                <small>Ukuran Kompresi : {{ $uji->stnk_size_kompresi ?? '0 KB' }}</small> <br>
+                <small>Compression Ratio : {{ $uji->stnk_compression_ratio ?? '0%' }}</small> <br>
+                <small>Space Saving : {{ $uji->stnk_space_saving ?? '0%' }}</small> <br>
               </div>
             </div>
             <div class="single-profile-data d-flex align-items-center justify-content-between">
@@ -115,7 +119,9 @@
               <div class="data-content">
                 <img src="{{ asset('storage/surat_uji_kendaraan/' . $uji->surat_uji_kendaraan ) }}" width="100" alt="surat_uji_kendaraan"><br>
                 <small class="file-size-kk">Ukuran Asli : {{ $uji->surat_uji_kendaraan_size_asli ?? '0 KB' }}</small> <br>
-                <small>Ukuran Kompresi : {{ $uji->surat_uji_kendaraan_size_kompresi ?? '0 KB' }}</small>
+                <small>Ukuran Kompresi : {{ $uji->surat_uji_kendaraan_size_kompresi ?? '0 KB' }}</small> <br>
+                <small>Compression Ratio : {{ $uji->surat_uji_kendaraan_compression_ratio ?? '0%' }}</small> <br>
+                <small>Space Saving : {{ $uji->surat_uji_kendaraan_space_saving ?? '0%' }}</small> <br>
               </div>
             </div>
           </div>

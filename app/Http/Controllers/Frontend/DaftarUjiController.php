@@ -8,12 +8,31 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Uji;
 use Image;
 use App\Helpers\Huffman;
+use Carbon\Carbon;
 
 class DaftarUjiController extends Controller
 {
     public function index()
     {
-        return view('frontend.daftar-uji');
+        $now = Carbon::now();
+        $month = $now->format('m');
+        $year = $now->format('Y');
+
+        $last = Uji::whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->orderBy('nomor_pemeriksaan', 'desc')
+            ->first();
+
+        $lastNumber = 0;
+
+        if ($last && preg_match('/EKIR\/' . $month . '\/' . $year . '\/(\d+)/', $last->nomor_pemeriksaan, $matches)) {
+            $lastNumber = (int)$matches[1];
+        }
+
+        $nextNumber = $lastNumber + 1;
+        $nomorPemeriksaan = 'EKIR/' . $month . '/' . $year . '/' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        return view('frontend.daftar-uji', compact('nomorPemeriksaan'));
     }
     
     public function store(Request $request)
@@ -40,6 +59,27 @@ class DaftarUjiController extends Controller
             'surat_uji_kendaraan' => 'required|mimes:jpg,png,jpeg|image',
         ]);
 
+        $now = Carbon::now();
+        $month = $now->format('m');
+        $year = $now->format('Y');
+
+        // Cari nomor terakhir untuk bulan & tahun ini
+        $last = Uji::whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->orderBy('nomor_pemeriksaan', 'desc')
+                    ->first();
+
+        $lastNumber = 0;
+
+        if ($last && preg_match('/EKIR\/' . $month . '\/' . $year . '\/(\d+)/', $last->nomor_pemeriksaan, $matches)) {
+            $lastNumber = (int)$matches[1];
+        }
+
+        $nextNumber = $lastNumber + 1;
+        $nomorPemeriksaan = 'EKIR/' . $month . '/' . $year . '/' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        $data['nomor_pemeriksaan'] = $nomorPemeriksaan;
+
         // Ambil kode terakhir yang sudah ada dari database
         $lastKode = Uji::where('kode', 'like', 'KIR%')->orderBy('kode', 'desc')->first();
 
@@ -56,43 +96,59 @@ class DaftarUjiController extends Controller
         if ($request->hasFile('ktp')) {
             $ktpImageFile = $request->file('ktp');
 
-            // liat ukuran gambar sebelum di kompresi
-            $ktpBeforeCompressed = $this->beforeCompression($ktpImageFile);
+            // Ukuran sebelum kompresi (dalam bytes)
+            $ktpBeforeCompressedBytes = $ktpImageFile->getSize();
+            $ktpBeforeCompressed = $this->formatSize($ktpBeforeCompressedBytes);
 
-            // Kompres gambar dan simpan
+            // Kompresi
             $ktpCompressed = $this->compressImage($ktpImageFile, 'ktp');
 
+            // Hitung Cr dan Ss
+            $stats = $this->calculateCompressionStats($ktpBeforeCompressedBytes, $ktpCompressed['sizeKompresiBytes']);
+        
             $data['ktp'] = $ktpCompressed['filename'];
-            $data['ktp_size_asli'] = $ktpBeforeCompressed;
             $data['ktp_size_kompresi'] = $ktpCompressed['sizeKompresi'];
+            $data['ktp_size_asli'] = $ktpBeforeCompressed;
+            $data['ktp_compression_ratio'] = $stats['compression_ratio'] . '%';
+            $data['ktp_space_saving'] = $stats['space_saving'] . '%';
         }
 
         if ($request->hasFile('stnk')) {
             $stnkImageFile = $request->file('stnk');
 
-            // liat ukuran gambar sebelum di kompresi
-            $stnkBeforeCompressed = $this->beforeCompression($stnkImageFile);
+            // Ukuran sebelum kompresi (dalam bytes)
+            $stnkBeforeCompressedBytes = $stnkImageFile->getSize();
+            $stnkBeforeCompressed = $this->formatSize($stnkBeforeCompressedBytes);
 
-            // Kompres gambar dan simpan
+            // Kompresi
             $stnkCompressed = $this->compressImage($stnkImageFile, 'stnk');
 
+            // Hitung Cr dan Ss
+            $stats = $this->calculateCompressionStats($stnkBeforeCompressedBytes, $stnkCompressed['sizeKompresiBytes']);
             $data['stnk'] = $stnkCompressed['filename'];
-            $data['stnk_size_asli'] = $stnkBeforeCompressed;
             $data['stnk_size_kompresi'] = $stnkCompressed['sizeKompresi'];
+            $data['stnk_size_asli'] = $stnkBeforeCompressed;
+            $data['stnk_compression_ratio'] = $stats['compression_ratio'] . '%';
+            $data['stnk_space_saving'] = $stats['space_saving'] . '%';
         }
 
         if ($request->hasFile('surat_uji_kendaraan')) {
             $suratUjiKendaraanImageFile = $request->file('surat_uji_kendaraan');
 
-            // liat ukuran gambar sebelum di kompresi
-            $suratUjiKendaraanBeforeCompressed = $this->beforeCompression($suratUjiKendaraanImageFile);
+            // Ukuran sebelum kompresi (dalam bytes)
+            $suratUjiKendaraanBeforeCompressedBytes = $suratUjiKendaraanImageFile->getSize();
+            $suratUjiKendaraanBeforeCompressed = $this->formatSize($suratUjiKendaraanBeforeCompressedBytes);
 
-            // Kompres gambar dan simpan
+            // Kompresi
             $suratUjiKendaraanCompressed = $this->compressImage($suratUjiKendaraanImageFile, 'surat_uji_kendaraan');
 
+            // Hitung Cr dan Ss
+            $stats = $this->calculateCompressionStats($suratUjiKendaraanBeforeCompressedBytes, $suratUjiKendaraanCompressed['sizeKompresiBytes']);
             $data['surat_uji_kendaraan'] = $suratUjiKendaraanCompressed['filename'];
-            $data['surat_uji_kendaraan_size_asli'] = $suratUjiKendaraanBeforeCompressed;
             $data['surat_uji_kendaraan_size_kompresi'] = $suratUjiKendaraanCompressed['sizeKompresi'];
+            $data['surat_uji_kendaraan_size_asli'] = $suratUjiKendaraanBeforeCompressed;
+            $data['surat_uji_kendaraan_compression_ratio'] = $stats['compression_ratio'] . '%';
+            $data['surat_uji_kendaraan_space_saving'] = $stats['space_saving'] . '%';
         }
 
         Uji::create($data);
@@ -131,13 +187,9 @@ class DaftarUjiController extends Controller
 
         return [
             'filename' => $filename,
-            'sizeKompresi' => $sizeKompresi
+            'sizeKompresi' => $this->formatSize(filesize($fullFilePath)), // yang tampil
+            'sizeKompresiBytes' => filesize($fullFilePath)
         ];
-    }
-
-    public function beforeCompression($imageFile)
-    {
-        return $this->formatSize($imageFile->getSize());
     }
 
     public function formatSize($sizeBytes)
@@ -146,5 +198,20 @@ class DaftarUjiController extends Controller
 
         // Jika lebih dari 1024 KB (1 MB), konversi ke MB
         return ($sizeKB >= 1024) ? round($sizeKB / 1024, 2) . ' MB' : round($sizeKB, 2) . ' KB';
+    }
+
+    public function calculateCompressionStats($originalSizeBytes, $compressedSizeBytes)
+    {
+        if ($originalSizeBytes === 0) {
+            return ['compression_ratio' => 0, 'space_saving' => 0];
+        }
+
+        $compressionRatio = ($compressedSizeBytes / $originalSizeBytes) * 100;
+        $spaceSaving = (1 - ($compressedSizeBytes / $originalSizeBytes)) * 100;
+
+        return [
+            'compression_ratio' => round($compressionRatio, 2), // dalam persen
+            'space_saving' => round($spaceSaving, 2) // dalam persen
+        ];
     }
 }

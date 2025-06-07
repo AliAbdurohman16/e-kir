@@ -93,22 +93,101 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Merk Kendaraan</span></div>
-                <input class="form-control @error('merk_kendaraan') is-invalid @enderror" type="text" name="merk_kendaraan" placeholder="Merk Kendaraan" required>
+                <select class="form-control @error('merk_kendaraan') is-invalid @enderror" name="merk_kendaraan" required>
+                  <option value="">-- Pilih Merk --</option>
+
+                  <!-- Mobil -->
+                  <optgroup label="Mobil">
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Suzuki">Suzuki</option>
+                    <option value="Daihatsu">Daihatsu</option>
+                    <option value="Mitsubishi">Mitsubishi</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Wuling">Wuling</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Isuzu">Isuzu</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                  </optgroup>
+
+                  <!-- Motor -->
+                  <optgroup label="Motor">
+                    <option value="Yamaha">Yamaha</option>
+                    <option value="Honda (Motor)">Honda (Motor)</option>
+                    <option value="Kawasaki">Kawasaki</option>
+                    <option value="Suzuki (Motor)">Suzuki (Motor)</option>
+                    <option value="Vespa">Vespa</option>
+                    <option value="Piaggio">Piaggio</option>
+                    <option value="Benelli">Benelli</option>
+                    <option value="TVS">TVS</option>
+                  </optgroup>
+
+                  <!-- Lainnya -->
+                  <optgroup label="Lainnya">
+                    <option value="Hino">Hino</option>
+                    <option value="Fuso">Fuso</option>
+                    <option value="Tata">Tata</option>
+                    <option value="UD Trucks">UD Trucks</option>
+                  </optgroup>
+                </select>
                 @error('merk_kendaraan')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
                 @enderror
               </div>
+
               <div class="mb-3">
                 <div class="title mb-2"><span>Tipe Kendaraan</span></div>
-                <input class="form-control @error('tipe_kendaraan') is-invalid @enderror" type="text" name="tipe_kendaraan" placeholder="Tipe Kendaraan" required>
+                <select class="form-control @error('tipe_kendaraan') is-invalid @enderror" name="tipe_kendaraan" required>
+                  <option value="">-- Pilih Tipe --</option>
+
+                  <!-- Mobil -->
+                  <optgroup label="Mobil Penumpang">
+                    <option value="Sedan">Sedan</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="SUV">SUV</option>
+                    <option value="MPV">MPV</option>
+                    <option value="Convertible">Convertible</option>
+                    <option value="Crossover">Crossover</option>
+                  </optgroup>
+
+                  <optgroup label="Mobil Niaga">
+                    <option value="Pickup">Pickup</option>
+                    <option value="Box">Box</option>
+                    <option value="Minibus">Minibus</option>
+                    <option value="Double Cabin">Double Cabin</option>
+                    <option value="Truck Ringan">Truck Ringan</option>
+                    <option value="Truck Berat">Truck Berat</option>
+                  </optgroup>
+
+                  <!-- Motor -->
+                  <optgroup label="Motor">
+                    <option value="Skuter Matik">Skuter Matik</option>
+                    <option value="Bebek">Bebek</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Trail / Adventure">Trail / Adventure</option>
+                    <option value="Cruiser">Cruiser</option>
+                    <option value="Moge (Motor Gede)">Moge (Motor Gede)</option>
+                  </optgroup>
+
+                  <!-- Lainnya -->
+                  <optgroup label="Lainnya">
+                    <option value="Bus">Bus</option>
+                    <option value="Forklift">Forklift</option>
+                    <option value="Alat Berat">Alat Berat</option>
+                  </optgroup>
+                </select>
                 @error('tipe_kendaraan')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
                 @enderror
               </div>
+
               <div class="mb-3">
                 <div class="title mb-2"><span>Tahun Pembuatan</span></div>
                 <input class="form-control @error('tahun_pembuatan') is-invalid @enderror" type="number" name="tahun_pembuatan" placeholder="Tahun Pembuatan" required>
@@ -129,7 +208,7 @@
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Pemeriksaan</span></div>
-                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" placeholder="Nomor Pemeriksaan" required>
+                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" value="{{ old('nomor_pemeriksaan', $nomorPemeriksaan ?? '') }}" readonly required>
                 @error('nomor_pemeriksaan')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
