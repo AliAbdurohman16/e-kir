@@ -95,8 +95,6 @@
                 <div class="title mb-2"><span>Merk Kendaraan</span></div>
                 <select class="form-control @error('merk_kendaraan') is-invalid @enderror" name="merk_kendaraan" required>
                   <option value="">-- Pilih Merk --</option>
-
-                  <!-- Mobil -->
                   <optgroup label="Mobil">
                     <option value="Toyota">Toyota</option>
                     <option value="Honda">Honda</option>
@@ -111,26 +109,6 @@
                     <option value="Isuzu">Isuzu</option>
                     <option value="BMW">BMW</option>
                     <option value="Mercedes-Benz">Mercedes-Benz</option>
-                  </optgroup>
-
-                  <!-- Motor -->
-                  <optgroup label="Motor">
-                    <option value="Yamaha">Yamaha</option>
-                    <option value="Honda (Motor)">Honda (Motor)</option>
-                    <option value="Kawasaki">Kawasaki</option>
-                    <option value="Suzuki (Motor)">Suzuki (Motor)</option>
-                    <option value="Vespa">Vespa</option>
-                    <option value="Piaggio">Piaggio</option>
-                    <option value="Benelli">Benelli</option>
-                    <option value="TVS">TVS</option>
-                  </optgroup>
-
-                  <!-- Lainnya -->
-                  <optgroup label="Lainnya">
-                    <option value="Hino">Hino</option>
-                    <option value="Fuso">Fuso</option>
-                    <option value="Tata">Tata</option>
-                    <option value="UD Trucks">UD Trucks</option>
                   </optgroup>
                 </select>
                 @error('merk_kendaraan')
@@ -162,23 +140,6 @@
                     <option value="Double Cabin">Double Cabin</option>
                     <option value="Truck Ringan">Truck Ringan</option>
                     <option value="Truck Berat">Truck Berat</option>
-                  </optgroup>
-
-                  <!-- Motor -->
-                  <optgroup label="Motor">
-                    <option value="Skuter Matik">Skuter Matik</option>
-                    <option value="Bebek">Bebek</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Trail / Adventure">Trail / Adventure</option>
-                    <option value="Cruiser">Cruiser</option>
-                    <option value="Moge (Motor Gede)">Moge (Motor Gede)</option>
-                  </optgroup>
-
-                  <!-- Lainnya -->
-                  <optgroup label="Lainnya">
-                    <option value="Bus">Bus</option>
-                    <option value="Forklift">Forklift</option>
-                    <option value="Alat Berat">Alat Berat</option>
                   </optgroup>
                 </select>
                 @error('tipe_kendaraan')
