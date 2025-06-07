@@ -8,31 +8,12 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Uji;
 use Image;
 use App\Helpers\Huffman;
-use Carbon\Carbon;
 
 class DaftarUjiController extends Controller
 {
     public function index()
     {
-        $now = Carbon::now();
-        $month = $now->format('m');
-        $year = $now->format('Y');
-
-        $last = Uji::whereYear('created_at', $year)
-            ->whereMonth('created_at', $month)
-            ->orderBy('nomor_pemeriksaan', 'desc')
-            ->first();
-
-        $lastNumber = 0;
-
-        if ($last && preg_match('/EKIR\/' . $month . '\/' . $year . '\/(\d+)/', $last->nomor_pemeriksaan, $matches)) {
-            $lastNumber = (int)$matches[1];
-        }
-
-        $nextNumber = $lastNumber + 1;
-        $nomorPemeriksaan = 'EKIR/' . $month . '/' . $year . '/' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
-        return view('frontend.daftar-uji', compact('nomorPemeriksaan'));
+        return view('frontend.daftar-uji');
     }
     
     public function store(Request $request)
@@ -58,27 +39,6 @@ class DaftarUjiController extends Controller
             'stnk' => 'required|mimes:jpg,png,jpeg|image',
             'surat_uji_kendaraan' => 'required|mimes:jpg,png,jpeg|image',
         ]);
-
-        $now = Carbon::now();
-        $month = $now->format('m');
-        $year = $now->format('Y');
-
-        // Cari nomor terakhir untuk bulan & tahun ini
-        $last = Uji::whereYear('created_at', $year)
-                    ->whereMonth('created_at', $month)
-                    ->orderBy('nomor_pemeriksaan', 'desc')
-                    ->first();
-
-        $lastNumber = 0;
-
-        if ($last && preg_match('/EKIR\/' . $month . '\/' . $year . '\/(\d+)/', $last->nomor_pemeriksaan, $matches)) {
-            $lastNumber = (int)$matches[1];
-        }
-
-        $nextNumber = $lastNumber + 1;
-        $nomorPemeriksaan = 'EKIR/' . $month . '/' . $year . '/' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
-        $data['nomor_pemeriksaan'] = $nomorPemeriksaan;
 
         // Ambil kode terakhir yang sudah ada dari database
         $lastKode = Uji::where('kode', 'like', 'KIR%')->orderBy('kode', 'desc')->first();

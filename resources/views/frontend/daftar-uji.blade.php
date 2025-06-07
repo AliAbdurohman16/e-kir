@@ -168,8 +168,8 @@
                 @enderror
               </div>
               <div class="mb-3">
-                <div class="title mb-2"><span>Nomor Pemeriksaan</span></div>
-                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" value="{{ old('nomor_pemeriksaan', $nomorPemeriksaan ?? '') }}" readonly required>
+                <div class="title mb-2"><span>Nomor Uji Kendaraan</span></div>
+                <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" placeholder="Nomor Uji Kendaraan" required>
                 @error('nomor_pemeriksaan')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
