@@ -158,7 +158,7 @@
                     </span>
                 @enderror
               </div>
-              <div class="mb-3">
+              {{-- <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Kendaraan</span></div>
                 <input class="form-control @error('nomor_kendaraan') is-invalid @enderror" type="text" name="nomor_kendaraan" placeholder="Nomor Kendaraan" required>
                 @error('nomor_kendaraan')
@@ -166,7 +166,77 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+              </div> --}}
+              <div class="mb-3">
+                <div class="title mb-2"><span>Nomor Kendaraan</span></div>
+                <div class="d-flex gap-2">
+                  <select class="form-control @error('kode_daerah') is-invalid @enderror" name="kode_daerah" required style="width: 80px;">
+                    <option value="">Kode</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="T">T</option>
+                    <option value="Z">Z</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="K">K</option>
+                    <option value="R">R</option>
+                    <option value="AA">AA</option>
+                    <option value="AB">AB</option>
+                    <option value="AD">AD</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="P">P</option>
+                    <option value="S">S</option>
+                    <option value="W">W</option>
+                    <option value="AE">AE</option>
+                    <option value="AG">AG</option>
+                    <option value="DA">DA</option>
+                    <option value="DB">DB</option>
+                    <option value="DC">DC</option>
+                    <option value="DD">DD</option>
+                    <option value="DE">DE</option>
+                    <option value="DF">DF</option>
+                    <option value="DG">DG</option>
+                    <option value="DH">DH</option>
+                    <option value="DK">DK</option>
+                    <option value="DL">DL</option>
+                    <option value="DM">DM</option>
+                    <option value="DN">DN</option>
+                    <option value="DR">DR</option>
+                    <option value="DS">DS</option>
+                    <option value="DT">DT</option>
+                    <option value="EA">EA</option>
+                    <option value="EB">EB</option>
+                    <option value="ED">ED</option>
+                    <option value="EJ">EJ</option>
+                    <option value="F1">F1</option>
+                    <option value="H1">H1</option>
+                    <option value="KB">KB</option>
+                    <option value="KH">KH</option>
+                    <option value="KT">KT</option>
+                    <option value="KU">KU</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                  </select>
+                  <input class="form-control @error('nomor_plat') is-invalid @enderror" type="number" name="nomor_plat" placeholder="1234" maxlength="4" required style="width: 100px;">
+                  <input class="form-control text-uppercase @error('huruf_plat') is-invalid @enderror" type="text" name="huruf_plat" placeholder="XYZ" maxlength="3" required style="width: 80px;">
+                </div>
+
+                @error('kode_daerah')
+                  <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+                @error('nomor_plat')
+                  <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+                @error('huruf_plat')
+                  <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
               </div>
+
               <div class="mb-3">
                 <div class="title mb-2"><span>Nomor Uji Kendaraan</span></div>
                 <input class="form-control @error('nomor_pemeriksaan') is-invalid @enderror" type="text" name="nomor_pemeriksaan" placeholder="Nomor Uji Kendaraan" required>

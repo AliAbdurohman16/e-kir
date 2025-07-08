@@ -26,7 +26,9 @@ class DaftarUjiController extends Controller
             'merk_kendaraan' => 'required',
             'tipe_kendaraan' => 'required',
             'tahun_pembuatan' => 'required',
-            'nomor_kendaraan' => 'required',
+            'kode_daerah' => 'required',
+            'nomor_plat' => 'required',
+            'huruf_plat' => 'required',
             'nomor_pemeriksaan' => 'required',
             'nomor_chassis' => 'required',
             'nomor_mesin' => 'required',
@@ -40,6 +42,8 @@ class DaftarUjiController extends Controller
             'surat_uji_kendaraan' => 'required|mimes:jpg,png,jpeg|image',
         ]);
 
+        $data = $request->except(['kode_daerah', 'nomor_plat', 'huruf_plat']);
+
         // Ambil kode terakhir yang sudah ada dari database
         $lastKode = Uji::where('kode', 'like', 'KIR%')->orderBy('kode', 'desc')->first();
 
@@ -48,10 +52,19 @@ class DaftarUjiController extends Controller
 
         // Buat kode baru dengan format KIR+4 digit angka
         $newKode = 'KIR' . str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-
+        
         $data['user_id'] = auth()->user()->id;
-
+        
         $data['kode'] = $newKode;
+        
+        $kode = strtoupper($request->input('kode_daerah'));
+        $nomor = $request->input('nomor_plat');
+        $huruf = strtoupper($request->input('huruf_plat'));
+        
+        // Gabung jadi satu format: B 1234 XYZ
+        $nomor_kendaraan = $kode . ' ' . $nomor . ' ' . $huruf;
+
+        $data['nomor_kendaraan'] = $nomor_kendaraan;
 
         if ($request->hasFile('ktp')) {
             $ktpImageFile = $request->file('ktp');
